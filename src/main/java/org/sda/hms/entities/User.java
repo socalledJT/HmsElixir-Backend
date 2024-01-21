@@ -6,6 +6,7 @@ import org.sda.hms.entities.enums.UserRole;
 
 @Data
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
