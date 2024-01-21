@@ -1,0 +1,23 @@
+package org.sda.hms.entities;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Table(name="employee")
+@Data
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user_id;
+
+    @ManyToOne
+    @JoinColumn(name="department_id", referencedColumnName = "id")
+    private Department department_id;
+
+
+}
