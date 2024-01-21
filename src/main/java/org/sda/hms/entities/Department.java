@@ -1,7 +1,6 @@
 package org.sda.hms.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -9,11 +8,14 @@ import lombok.Data;
 @Table(name = "department")
 public class Department {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "dep_name")
     private String depName;
 
-    private Integer employee_it;
+    @Column(name = "employee_id")
+    private Integer employeeId;
 
 }
