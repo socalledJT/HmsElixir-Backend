@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:mysql://localhost:3306/hms
+    username: root
+    password: Panteraroze@2000
+    driverClassName: com.mysql.cj.jdbc.Driver
+server:
+  port: 8080
