@@ -13,11 +13,11 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")
-    private User user_id;
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name="department_id", referencedColumnName = "id")
-    private Department department_id;
+    private Department departmentId;
 
 
 }
