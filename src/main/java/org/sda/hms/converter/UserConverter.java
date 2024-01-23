@@ -31,8 +31,7 @@ public class UserConverter {
         return user;
     }
 
-    public static User toEntityForUpdate(UserDTO userDTO) {
-        User user = new User();
+    public static User toEntityForUpdate(UserDTO userDTO, User user) {
 
         user.setFullName(userDTO.getFullName());
         user.setEmail(userDTO.getEmail());
@@ -41,8 +40,7 @@ public class UserConverter {
         return user;
     }
 
-    public static User toEntityForUpdateAdmin(UserDTO userDTO) {
-        User user = new User();
+    public static User toEntityForUpdateAdmin(UserDTO userDTO, User user) {
 
         user.setFullName(userDTO.getFullName());
         user.setEmail(userDTO.getEmail());

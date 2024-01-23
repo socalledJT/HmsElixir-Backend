@@ -2,8 +2,6 @@ package org.sda.hms.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.sda.hms.entities.enums.UserRole;
 
 @Data
