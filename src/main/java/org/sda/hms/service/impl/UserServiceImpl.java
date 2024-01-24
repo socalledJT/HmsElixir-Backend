@@ -48,4 +48,11 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> findAll() {
         return userRepository.findAll().stream().map(UserConverter::toDto).toList();
     }
+
+    @Override
+    public void delete(UserDTO userDTO) {
+        User user = UserConverter.toEntity(userDTO);
+
+        userRepository.delete(user);
+    }
 }
