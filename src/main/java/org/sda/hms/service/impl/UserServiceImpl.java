@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import org.sda.hms.converter.UserConverter;
 import org.sda.hms.dto.UserDTO;
 import org.sda.hms.entities.User;
+import org.sda.hms.repository.AppointmentRepo;
+import org.sda.hms.repository.ExaminationRepository;
 import org.sda.hms.repository.UserRepository;
 import org.sda.hms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ExaminationRepository examinationRepository;
+
+    @Autowired
+    private AppointmentRepo appointmentRepo;
 
     @Override
     public void save(UserDTO userDTO) {
@@ -37,6 +45,11 @@ public class UserServiceImpl implements UserService {
     public UserDTO findById(Integer id) {
         return UserConverter.toDto(userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("This user does not exist!")));
+    }
+
+    @Override
+    public UserDTO findByEmail(String email) {
+        return  UserConverter.toDto(userRepository.findByEmail(email));
     }
 
     @Override
