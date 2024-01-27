@@ -23,4 +23,8 @@ public class Examination {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
+
+    @ManyToOne
+    @JoinColumn(name = " employee_id", referencedColumnName = "employeeId")
+    private Employee employeeId;
 }
