@@ -15,8 +15,7 @@ public class Department {
     @Column(name = "dep_name")
     private String depName;
 
-    @OneToMany
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
-    private Employee employeeId;
+    @Column(name = "employee_id")
+    private Integer employeeId;
 
 }
