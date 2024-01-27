@@ -27,16 +27,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(UserDTO userDTO) {
+        User user = userRepository.findById(userDTO.getId())
+                .orElseThrow(() -> new RuntimeException("User with id " + userDTO.getId() + "doesn't exist!"));
 
+        userRepository.save(UserConverter.toEntityForUpdate(userDTO, user));
     }
 
     @Override
     public UserDTO findById(Integer id) {
-        return null;
+        return UserConverter.toDto(userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("This user does not exist!")));
     }
+
+//    @Override
+//    public UserDTO findByEmail(String email) {
+//        return UserConverter.toDto(userRepository.findByEmail(email));
+//    }
 
     @Override
     public List<UserDTO> findAll() {
-        return null;
+        return userRepository.findAll().stream().map(UserConverter::toDto).toList();
     }
 }
