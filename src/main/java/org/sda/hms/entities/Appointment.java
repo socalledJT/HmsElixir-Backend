@@ -1,5 +1,4 @@
 package org.sda.hms.entities;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
