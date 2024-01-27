@@ -16,6 +16,6 @@ public class Department {
     private String depName;
 
     @Column(name = "employee_id")
-    private Integer employeeId;
+    private Employee employeeId;
 
 }
