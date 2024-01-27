@@ -16,9 +16,19 @@ public class EmployeeController {
     public void save(@RequestBody EmployeeDto employeeDto){
         employeeService.save(employeeDto);
     }
-    @GetMapping("id")
+    @GetMapping("/{id}")
     public ResponseEntity<EmployeeDto> findById(@PathVariable Integer id){
         return ResponseEntity.ok(employeeService.findById(id));
+    }
+
+    @PostMapping
+    public void update(@RequestBody EmployeeDto employeeDto){
+        employeeService.update(employeeDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable EmployeeDto id) { /////(Integer id)
+        employeeService.delete(id);
     }
 
 
