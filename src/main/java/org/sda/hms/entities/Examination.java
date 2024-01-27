@@ -14,7 +14,7 @@ public class Examination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "dexamination_date")
+    @Column(name = "examination_date")
     private LocalDateTime examinationDate;
 
     @Column(name = "examination_notes")
