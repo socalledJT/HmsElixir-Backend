@@ -14,7 +14,7 @@ public class Examination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "dexamination_date")
+    @Column(name = "examination_date")
     private LocalDateTime examinationDate;
 
     @Column(name = "examination_notes")
@@ -23,4 +23,8 @@ public class Examination {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
+
+    @ManyToOne
+    @JoinColumn(name = " employee_id", referencedColumnName = "employeeId")
+    private Employee employeeId;
 }
