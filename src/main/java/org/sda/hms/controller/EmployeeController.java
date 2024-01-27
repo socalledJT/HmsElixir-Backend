@@ -21,5 +21,11 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.findById(id));
     }
 
+    @PostMapping
+    public void update(@RequestBody EmployeeDto employeeDto){
+        employeeService.update(employeeDto);
+    }
+
+
 
 }
