@@ -39,13 +39,25 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("This user does not exist!")));
     }
 
+    @Override
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream().map(UserConverter::toDto).toList();
+    }
+
+    @Override
+    public void delete(UserDTO userDTO) {
+        User user = UserConverter.toEntity(userDTO);
+
+        userRepository.delete(user);
+    }
+
+//    TODO Add findByEmail function for the User entity
 //    @Override
 //    public UserDTO findByEmail(String email) {
 //        return UserConverter.toDto(userRepository.findByEmail(email));
 //    }
 
-    @Override
-    public List<UserDTO> findAll() {
-        return userRepository.findAll().stream().map(UserConverter::toDto).toList();
-    }
+//    TODO Add reserveAppointment function for User Entity
+//    TODO Add reserveExamination function for User Entity
+//    All three functions waiting for other entities to get CRUDs
 }
