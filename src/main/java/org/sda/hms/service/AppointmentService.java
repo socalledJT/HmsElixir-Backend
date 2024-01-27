@@ -10,7 +10,7 @@ public interface AppointmentService {
     void save(AppointmentDTO appointmentDTO);
     AppointmentDTO findById(Integer id);
     void update(AppointmentDTO appointmentDTO);
-    void delete(Integer id);
+    void delete(AppointmentDTO appointmentDTO);
     List<AppointmentDTO> findAll();
 
     //Update

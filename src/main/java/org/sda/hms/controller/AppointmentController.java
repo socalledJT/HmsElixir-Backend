@@ -28,15 +28,14 @@ public class AppointmentController {
     }
 
     @PutMapping
-    public void update(@RequestBody AppointmentDTO userDTO) {
+    public void update(@RequestBody AppointmentDTO appointmentDTO) {
 
-        appointmantService.update(userDTO);
+        appointmantService.update(appointmentDTO);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id){
 
-        appointmantService.delete(id);
     }
 
     @GetMapping
