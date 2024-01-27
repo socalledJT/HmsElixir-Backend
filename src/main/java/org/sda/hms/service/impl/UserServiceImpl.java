@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
 //    TODO Add findByEmail function for the User entity
-//    @Override
+//    @Override-
 //    public UserDTO findByEmail(String email) {
 //        return UserConverter.toDto(userRepository.findByEmail(email));
 //    }
