@@ -11,5 +11,5 @@ public interface AppointmantService {
     AppointmentDTO findById(Integer id);
     void update(AppointmentDTO appointmentDTO);
     void delete(Integer id);
-    List<AppointmentDTO> findAll();
+    List<AppointmentDTO> findAll(); //koment
 }
