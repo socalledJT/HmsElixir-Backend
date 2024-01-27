@@ -16,15 +16,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Transactional
+
 public class DepartmentServiceImpl implements DepartmentService {
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
     @Override
     public void save(DepartmentDTO departmentDTO) {
-
-    }
-
-    @Override
-    public void update(DepartmentDTO departmentDTO) {
+        Department department = DepartmentConverter.toEntity(departmentDTO);
+        departmentRepository.save(department);
 
     }
 
@@ -32,14 +33,20 @@ public class DepartmentServiceImpl implements DepartmentService {
     public DepartmentDTO findById(Integer id) {
         return null;
     }
-
+    @Override
+    public void update(DepartmentDTO departmentDTO) {
+    }
+    @Override
+    public void delete(Integer id) {
+    }
     @Override
     public List<DepartmentDTO> findAll() {
         return null;
     }
 
-    @Override
-    public void delete(DepartmentDTO departmentDTO) {
+
 
     }
-}
+
+
+

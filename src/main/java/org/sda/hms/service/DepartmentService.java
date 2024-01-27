@@ -7,13 +7,10 @@ import java.util.List;
 
 public interface DepartmentService {
     void save(DepartmentDTO departmentDTO);
+    DepartmentDTO findById(Integer id);
 
     void update( DepartmentDTO departmentDTO);
 
-    DepartmentDTO findById(Integer id);
-
-
+    void delete( Integer id);
     List<DepartmentDTO> findAll();
-
-    void delete(DepartmentDTO departmentDTO);
 }
