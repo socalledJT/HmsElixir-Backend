@@ -1,8 +1,6 @@
 package org.sda.hms.service.impl;
 
-import org.sda.hms.converter.AppointmentConverter;
 import org.sda.hms.dto.AppointmentDTO;
-import org.sda.hms.entities.Appointment;
 import org.sda.hms.repository.AppointmentRepo;
 import org.sda.hms.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,7 @@ public class AppointementServiceImpl implements AppointmentService {
 
     @Override
     public void save(AppointmentDTO appointmentDTO) {
-        Appointment appointment = AppointmentConverter.toEntity(appointmentDTO);
 
-        appointmentRepo.save(appointment);
     }
 
     @Override
@@ -32,12 +28,12 @@ public class AppointementServiceImpl implements AppointmentService {
 
     @Override
     public void update(AppointmentDTO appointmentDTO) {
-        System.out.println("Holaaaa");
+
     }
 
     @Override
     public void delete(Integer id) {
-        System.out.println("Guapaaaa");
+
     }
 
     @Override
