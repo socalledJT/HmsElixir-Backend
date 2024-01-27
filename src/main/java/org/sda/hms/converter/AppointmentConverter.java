@@ -20,7 +20,7 @@ public class AppointmentConverter {
         return appointment;
     }
 
-    public static AppointmentDTO appointmentDTO(Appointment appointment){
+    public static AppointmentDTO toDTO(Appointment appointment){
 
         AppointmentDTO appointmentDTO = new AppointmentDTO();
 
@@ -37,13 +37,8 @@ public class AppointmentConverter {
 
     public static Appointment toEntityForUpdate(Appointment appointment,AppointmentDTO appointmentDTO){
 
-        appointment.setId(appointmentDTO.getId());
         appointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
-        appointment.setPrescription(appointmentDTO.getPrescription());
         appointment.setPatientNotes(appointmentDTO.getPatientNotes());
-        appointment.setPatientId(appointmentDTO.getPatientId());
-        appointment.setDoctorId(appointmentDTO.getDoctorId());
-        appointment.setExaminationId(appointmentDTO.getExaminationId());
 
         return appointment;
     }
