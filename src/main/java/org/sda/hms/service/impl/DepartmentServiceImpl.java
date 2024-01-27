@@ -2,13 +2,9 @@ package org.sda.hms.service.impl;
 
 import jakarta.transaction.Transactional;
 import org.sda.hms.converter.DepartmentConverter;
-import org.sda.hms.converter.UserConverter;
 import org.sda.hms.dto.DepartmentDTO;
-import org.sda.hms.dto.UserDTO;
 import org.sda.hms.entities.Department;
-import org.sda.hms.entities.User;
 import org.sda.hms.repository.DepartmentRepository;
-import org.sda.hms.repository.UserRepository;
 import org.sda.hms.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
