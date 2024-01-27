@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 
 public class DepartmentServiceImpl implements DepartmentService {
 
@@ -31,17 +32,28 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDTO findById(Integer id) {
-        return null;
+        return DepartmentConverter.toDTO(departmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("This Department does not exist!")));
+
     }
     @Override
     public void update(DepartmentDTO departmentDTO) {
+        Department department = departmentRepository.findById(departmentDTO.getId())
+                .orElseThrow(() -> new RuntimeException("Department with id " + departmentDTO.getId() + "doesn't exist!"));
+
+        departmentRepository.save(DepartmentConverter.toEntityForUpdate(department, departmentDTO));
     }
     @Override
-    public void delete(Integer id) {
+    public void delete(DepartmentDTO departmentDTO) {
+        Department department = DepartmentConverter.toEntity(departmentDTO);
+
+        departmentRepository.delete(department);
     }
     @Override
     public List<DepartmentDTO> findAll() {
-        return null;
+
+            return departmentRepository.findAll().stream().map(DepartmentConverter::toDTO).toList();
+
     }
 
 

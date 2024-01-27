@@ -11,6 +11,6 @@ public interface DepartmentService {
 
     void update( DepartmentDTO departmentDTO);
 
-    void delete( Integer id);
+    void delete(DepartmentDTO departmentDTO);
     List<DepartmentDTO> findAll();
 }
