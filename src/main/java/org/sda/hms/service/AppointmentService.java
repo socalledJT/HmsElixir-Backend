@@ -12,4 +12,6 @@ public interface AppointmentService {
     void update(AppointmentDTO appointmentDTO);
     void delete(Integer id);
     List<AppointmentDTO> findAll();
+
+    //Update
 }
