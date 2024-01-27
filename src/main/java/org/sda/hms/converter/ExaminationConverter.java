@@ -19,7 +19,7 @@ public class ExaminationConverter {
             return examination;
         }
 
-        public static ExaminationDTO examinationDTO(Examination examination){
+        public static ExaminationDTO toDTO(Examination examination){
 
             ExaminationDTO examinationDTO = new ExaminationDTO();
 
