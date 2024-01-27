@@ -4,7 +4,7 @@ import org.sda.hms.converter.AppointmentConverter;
 import org.sda.hms.dto.AppointmentDTO;
 import org.sda.hms.entities.Appointment;
 import org.sda.hms.repository.AppointmentRepo;
-import org.sda.hms.service.AppointmantService;
+import org.sda.hms.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Service
-public class AppointementServiceImpl implements AppointmantService {
+public class AppointementServiceImpl implements AppointmentService {
 
     @Autowired
     private AppointmentRepo appointmentRepo;

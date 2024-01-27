@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
 //    @Override
-//    public UserDTO findByEmail(String email) {
+//    public UserDTO findByEmail(String email) { +
 //        return UserConverter.toDto(userRepository.findByEmail(email));
 //    }
 
