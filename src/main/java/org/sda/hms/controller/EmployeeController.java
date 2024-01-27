@@ -1,10 +1,13 @@
 package org.sda.hms.controller;
 
+import org.sda.hms.dto.AppointmentDTO;
 import org.sda.hms.dto.EmployeeDto;
 import org.sda.hms.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -31,5 +34,9 @@ public class EmployeeController {
         employeeService.delete(id);
     }
 
+    @GetMapping
+    public ResponseEntity<List<EmployeeDto>> findAll() {
 
+        return ResponseEntity.ok(employeeService.findAll());
+    }
 }
