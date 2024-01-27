@@ -5,7 +5,7 @@ import org.sda.hms.entities.Appointment;
 
 import java.util.List;
 
-public interface AppointmantService {
+public interface AppointmentService {
 
     void save(AppointmentDTO appointmentDTO);
     AppointmentDTO findById(Integer id);
