@@ -12,7 +12,7 @@ public interface UserService {
 
     UserDTO findById(Integer id);
 
-//    UserDTO findByEmail(String email);
+    UserDTO findByEmail(String email);
     List<UserDTO> findAll();
 
     void delete(UserDTO userDTO);
