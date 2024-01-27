@@ -19,7 +19,7 @@ import java.util.List;
 public class AppointementServiceImpl implements AppointmentService {
 
     @Autowired
-    private AppointmentRepo appointmentRepo;
+    private AppointmentRepo appointmentRepo; //ciao
 
 
     @Override
