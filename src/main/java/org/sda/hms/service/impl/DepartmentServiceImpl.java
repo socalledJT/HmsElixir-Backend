@@ -24,6 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void save(DepartmentDTO departmentDTO) {
         if(departmentRepository.existsById(departmentDTO.getId())){
             throw new RuntimeException("Department already exist");
+
         }
         Department department = DepartmentConverter.toEntity(departmentDTO);
         departmentRepository.save(department);
