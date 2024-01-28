@@ -25,6 +25,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void save(DepartmentDTO departmentDTO) {
         if(departmentRepository.existsById(departmentDTO.getId())){
+
             throw new AlreadyExistsException("Department already exist");
 
         }
