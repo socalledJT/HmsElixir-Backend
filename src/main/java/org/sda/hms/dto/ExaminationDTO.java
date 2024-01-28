@@ -12,6 +12,6 @@ public class ExaminationDTO {
     private LocalDateTime examinationDate;
     private String examinationNotes;
     private UserDTO userId;
-    private EmployeeDto employeeId;
+    private EmployeeDTO employeeId;
 
   }
