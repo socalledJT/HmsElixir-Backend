@@ -2,6 +2,9 @@ package org.sda.hms.service.impl;
 
 import jakarta.transaction.Transactional;
 import org.sda.hms.converter.UserConverter;
+import org.sda.hms.dto.AppointmentDTO;
+import org.sda.hms.dto.EmployeeDTO;
+import org.sda.hms.dto.ExaminationDTO;
 import org.sda.hms.dto.UserDTO;
 import org.sda.hms.entities.User;
 import org.sda.hms.repository.AppointmentRepo;
@@ -64,13 +67,16 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
-//    TODO Add findByEmail function for the User entity
-//    @Override-
-//    public UserDTO findByEmail(String email) {
-//        return UserConverter.toDto(userRepository.findByEmail(email));
-//    }
-
 //    TODO Add reserveAppointment function for User Entity
+    public void reserveAppointment(AppointmentDTO appointmentDTO) {
+        UserDTO userDTO = new UserDTO();
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+
+
+
+    }
 //    TODO Add reserveExamination function for User Entity
-//    All three functions waiting for other entities to get CRUDs
+    public void reserveExamination(ExaminationDTO examinationDTO) {
+
+    }
 }
