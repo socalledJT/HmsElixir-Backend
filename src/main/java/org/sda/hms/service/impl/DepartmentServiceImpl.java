@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import org.sda.hms.converter.DepartmentConverter;
 import org.sda.hms.dto.DepartmentDTO;
 import org.sda.hms.entities.Department;
+import org.sda.hms.exeptions.AlreadyExistsException;
+import org.sda.hms.exeptions.NotAllowedException;
 import org.sda.hms.exeptions.NotFoundException;
 import org.sda.hms.repository.DepartmentRepository;
 import org.sda.hms.service.DepartmentService;
@@ -23,7 +25,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void save(DepartmentDTO departmentDTO) {
         if(departmentRepository.existsById(departmentDTO.getId())){
-            throw new RuntimeException("Department already exist");
+            throw new AlreadyExistsException("Department already exist");
 
         }
         Department department = DepartmentConverter.toEntity(departmentDTO);
@@ -35,13 +37,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentDTO findById(Integer id) {
         return DepartmentConverter.toDTO(departmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("This Department does not exist!")));
+                .orElseThrow(() -> new NotFoundException("This Department does not exist!")));
 
     }
     @Override
     public void update(DepartmentDTO departmentDTO) {
         if (departmentRepository == null) {
-            throw new RuntimeException("You must enter a valid Department name");
+            throw new NotAllowedException("You must enter a valid Department name");
         }
         Department department = departmentRepository.findById(departmentDTO.getId())
                 .orElseThrow(() -> new NotFoundException("Department with id " + departmentDTO.getId() + "doesn't exist!"));
