@@ -26,9 +26,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void save(DepartmentDTO departmentDTO) {
         if(departmentRepository.existsById(departmentDTO.getId())){
             throw new AlreadyExistsException("Department already exist");
-=========
-            throw new RuntimeException("Department already exist");
->>>>>>>>> Temporary merge branch 2
 
         }
         Department department = DepartmentConverter.toEntity(departmentDTO);
@@ -64,10 +61,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             return departmentRepository.findAll().stream().map(DepartmentConverter::toDTO).toList();
 
     }
-
-
-
-    }
+}
 
 
 
