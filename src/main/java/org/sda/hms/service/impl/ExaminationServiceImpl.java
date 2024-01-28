@@ -9,6 +9,7 @@ import org.sda.hms.service.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -21,8 +22,15 @@ public class ExaminationServiceImpl implements ExaminationService {
 
     @Override
     public void save(ExaminationDTO examinationDTO) {
+        if (examinationRepository.existsById(examinationDTO.getId())) {
+            throw new RuntimeException("Examination already exist");
+        }
+            if (examinationDTO.getExaminationDate().isBefore(LocalDateTime.now())){
+                throw  new NotFoundException("Date can not be before today date");
+        }
         Examination examination = ExaminationConverter.toEntity(examinationDTO);
         examinationRepository.save(examination);
+
 
     }
 
@@ -33,6 +41,9 @@ public class ExaminationServiceImpl implements ExaminationService {
     }
     @Override
     public void update (ExaminationDTO examinationDTO){
+        if (examinationDTO.getExaminationDate().equals(LocalDateTime.now())){
+            throw new RuntimeException("Date selected is not valid");
+        }
         Examination examination = examinationRepository.findById(examinationDTO.getId())
                 .orElseThrow(() -> new NotFoundException("Examination doesn't exist"));
                 examinationRepository.save(ExaminationConverter.toEntityForUpdate(examination, examinationDTO));
