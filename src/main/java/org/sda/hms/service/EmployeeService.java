@@ -1,13 +1,13 @@
 package org.sda.hms.service;
 
-import org.sda.hms.dto.EmployeeDto;
+import org.sda.hms.dto.EmployeeDTO;
 
 import java.util.List;
 
 public interface EmployeeService {
-    void save(EmployeeDto employeeDto);
-    void update(EmployeeDto employeeDto);
-    EmployeeDto findById(Integer id);
-    void delete(EmployeeDto employeeDto);
-    List<EmployeeDto> findAll();
+    void save(EmployeeDTO employeeDto);
+    void update(EmployeeDTO employeeDto);
+    EmployeeDTO findById(Integer id);
+    void delete(EmployeeDTO employeeDto);
+    List<EmployeeDTO> findAll();
 }
