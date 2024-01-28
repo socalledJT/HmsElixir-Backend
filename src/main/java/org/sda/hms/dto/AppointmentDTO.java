@@ -12,7 +12,7 @@ public class AppointmentDTO {
     private String prescription;
     private String patientNotes;
     private UserDTO patientId;
-    private EmployeeDto doctorId;
+    private EmployeeDTO doctorId;
     private ExaminationDTO examinationId;
 
 

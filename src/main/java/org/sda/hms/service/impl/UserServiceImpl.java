@@ -2,8 +2,14 @@ package org.sda.hms.service.impl;
 
 import jakarta.transaction.Transactional;
 import org.sda.hms.converter.UserConverter;
+import org.sda.hms.dto.AppointmentDTO;
+import org.sda.hms.dto.EmployeeDTO;
+import org.sda.hms.dto.ExaminationDTO;
 import org.sda.hms.dto.UserDTO;
 import org.sda.hms.entities.User;
+import org.sda.hms.exeptions.InvalidDataException;
+import org.sda.hms.repository.AppointmentRepo;
+import org.sda.hms.repository.ExaminationRepository;
 import org.sda.hms.repository.UserRepository;
 import org.sda.hms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +26,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserDTO userDTO) {
+       if (userDTO.getFullName().isEmpty() ||
+            userDTO.getFullName().isBlank() |
+            userDTO.getEmail().isEmpty() ||
+            userDTO.getPassword().isEmpty()) {
+           throw new InvalidDataException("Invalid data input!");
+       }
+
         User user = UserConverter.toEntity(userDTO);
 
         userRepository.save(user);
@@ -40,6 +53,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDTO findByEmail(String email) {
+        return  UserConverter.toDto(userRepository.findByEmail(email));
+    }
+
+    @Override
     public List<UserDTO> findAll() {
         return userRepository.findAll().stream().map(UserConverter::toDto).toList();
     }
@@ -50,14 +68,4 @@ public class UserServiceImpl implements UserService {
 
         userRepository.delete(user);
     }
-
-//    TODO Add findByEmail function for the User entity
-//    @Override
-//    public UserDTO findByEmail(String email) { +
-//        return UserConverter.toDto(userRepository.findByEmail(email));
-//    }
-
-//    TODO Add reserveAppointment function for User Entity
-//    TODO Add reserveExamination function for User Entity
-//    All three functions waiting for other entities to get CRUDs
 }
