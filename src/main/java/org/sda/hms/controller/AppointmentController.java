@@ -35,7 +35,8 @@ public class AppointmentController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id){
-
+       AppointmentDTO appointmentDTO = appointmantService.findById(id);
+       appointmantService.delete(appointmentDTO);
     }
 
     @GetMapping
