@@ -69,9 +69,6 @@ public class UserServiceImpl implements UserService {
 
 //    TODO Add reserveAppointment function for User Entity
     public void reserveAppointment(AppointmentDTO appointmentDTO) {
-        UserDTO userDTO = new UserDTO();
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-
 
 
     }
