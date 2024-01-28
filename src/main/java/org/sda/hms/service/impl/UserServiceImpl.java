@@ -7,7 +7,10 @@ import org.sda.hms.dto.EmployeeDTO;
 import org.sda.hms.dto.ExaminationDTO;
 import org.sda.hms.dto.UserDTO;
 import org.sda.hms.entities.User;
+import org.sda.hms.entities.enums.UserRole;
+import org.sda.hms.entities.utils.PasswordUtil;
 import org.sda.hms.exeptions.InvalidDataException;
+import org.sda.hms.exeptions.WrongPasswordException;
 import org.sda.hms.repository.AppointmentRepo;
 import org.sda.hms.repository.ExaminationRepository;
 import org.sda.hms.repository.UserRepository;
@@ -27,23 +30,58 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(UserDTO userDTO) {
        if (userDTO.getFullName().isEmpty() ||
-            userDTO.getFullName().isBlank() |
             userDTO.getEmail().isEmpty() ||
             userDTO.getPassword().isEmpty()) {
            throw new InvalidDataException("Invalid data input!");
        }
 
-        User user = UserConverter.toEntity(userDTO);
+       if (userDTO.getRole() == null) {
+           userDTO.setRole(UserRole.PATIENT);
+       }
 
-        userRepository.save(user);
+       userDTO.setPassword(PasswordUtil.hashPassword(userDTO.getPassword()));
+
+       User user = UserConverter.toEntity(userDTO);
+       userRepository.save(user);
     }
 
     @Override
     public void update(UserDTO userDTO) {
         User user = userRepository.findById(userDTO.getId())
-                .orElseThrow(() -> new RuntimeException("User with id " + userDTO.getId() + "doesn't exist!"));
+                .orElseThrow(() -> new RuntimeException("User with id " + userDTO.getId()
+                        + "doesn't exist!"));
+
+        if (userDTO.getFullName().isEmpty() ||
+                userDTO.getEmail().isEmpty() ||
+                userDTO.getPassword().isEmpty()) {
+            throw new InvalidDataException("Invalid data input!");
+        }
+
+        userDTO.setRole(UserRole.PATIENT);
+        userDTO.setPassword(PasswordUtil.hashPassword(userDTO.getPassword()));
 
         userRepository.save(UserConverter.toEntityForUpdate(userDTO, user));
+    }
+
+    @Override
+    public void updateAsAdmin(UserDTO userDTO) {
+        User user = userRepository.findById(userDTO.getId())
+                .orElseThrow(() -> new RuntimeException("User with id " + userDTO.getId()
+                        + "doesn't exist!"));
+
+        if (userDTO.getFullName().isEmpty() ||
+                userDTO.getEmail().isEmpty() ||
+                userDTO.getPassword().isEmpty()) {
+            throw new InvalidDataException("Invalid data input!");
+        }
+
+        if (userDTO.getRole() == null) {
+            userDTO.setRole(UserRole.PATIENT);
+        }
+
+        userDTO.setPassword(PasswordUtil.hashPassword(userDTO.getPassword()));
+
+        userRepository.save(UserConverter.toEntityForUpdateAdmin(userDTO, user));
     }
 
     @Override
@@ -64,7 +102,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(UserDTO userDTO) {
-        User user = UserConverter.toEntity(userDTO);
+        User user = userRepository.findById(userDTO.getId())
+                .orElseThrow(() -> new RuntimeException("User with id " + userDTO.getId()
+                        + "doesn't exist!"));
 
         userRepository.delete(user);
     }
