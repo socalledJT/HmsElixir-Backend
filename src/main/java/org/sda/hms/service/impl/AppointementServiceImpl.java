@@ -1,17 +1,16 @@
 package org.sda.hms.service.impl;
 
 import org.sda.hms.converter.AppointmentConverter;
-import org.sda.hms.converter.UserConverter;
 import org.sda.hms.dto.AppointmentDTO;
 import org.sda.hms.entities.Appointment;
-import org.sda.hms.entities.User;
-import org.sda.hms.exeptions.AlreadyExistsException;
+import org.sda.hms.exeptions.NotAllowedException;
 import org.sda.hms.exeptions.NotFoundException;
 import org.sda.hms.repository.AppointmentRepo;
 import org.sda.hms.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -25,8 +24,17 @@ public class AppointementServiceImpl implements AppointmentService {
     @Override
     public void save(AppointmentDTO appointmentDTO) {
 
-        Appointment appointment = AppointmentConverter.toEntity(appointmentDTO);
-        appointmentRepo.save(appointment);
+        if (!appointmentDTO.getAppointmentDate().isBefore(LocalDateTime.now())
+                && !appointmentDTO.getPatientNotes().isEmpty()
+                && appointmentDTO.getPatientId() != null
+                && appointmentDTO.getDoctorId() != null)
+        {
+            Appointment appointment = AppointmentConverter.toEntity(appointmentDTO);
+            appointmentRepo.save(appointment);
+
+        }else {
+            throw new NotAllowedException("Please, check the fields, some might be empty.");
+        }
     }
 
     @Override
@@ -39,18 +47,30 @@ public class AppointementServiceImpl implements AppointmentService {
     @Override
     public void update(AppointmentDTO appointmentDTO) {
 
-        Appointment appointment = appointmentRepo.findById(appointmentDTO.getId())
-                .orElseThrow(() -> new NotFoundException("Appointment with id " + appointmentDTO.getId() + "doesn't exist!"));
 
-        appointmentRepo.save(AppointmentConverter.toEntityForUpdate(appointment, appointmentDTO));
+        if (!appointmentDTO.getAppointmentDate().isBefore(LocalDateTime.now())
+                && !appointmentDTO.getPatientNotes().isEmpty()
+                && appointmentDTO.getPatientId() != null
+                && appointmentDTO.getDoctorId() != null)
+        {
+            Appointment appointment = appointmentRepo.findById(appointmentDTO.getId())
+                    .orElseThrow(() -> new NotFoundException("Appointment with id " + appointmentDTO.getId() + "doesn't exist!"));
+            appointmentRepo.save(AppointmentConverter.toEntityForUpdate(appointment, appointmentDTO));
+        }else {
+            throw new NotAllowedException("Sorry, you can not update your appointment.");
+        }
     }
 
     @Override
     public void delete(AppointmentDTO appointmentDTO) {
 
-        Appointment appointment = AppointmentConverter.toEntity(appointmentDTO);
+        if(appointmentDTO.getId() != null) {
+            Appointment appointment = AppointmentConverter.toEntity(appointmentDTO);
+            appointmentRepo.delete(appointment);
+        }else {
+            throw new NotFoundException("Sorry, you can not delete this appointment, it does not exist.");
 
-        appointmentRepo.delete(appointment);
+        }
     }
 
     @Override
