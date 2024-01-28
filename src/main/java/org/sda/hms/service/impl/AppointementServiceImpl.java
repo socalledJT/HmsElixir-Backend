@@ -1,5 +1,4 @@
 package org.sda.hms.service.impl;
-
 import org.sda.hms.converter.AppointmentConverter;
 import org.sda.hms.dto.AppointmentDTO;
 import org.sda.hms.entities.Appointment;
@@ -9,7 +8,6 @@ import org.sda.hms.repository.AppointmentRepo;
 import org.sda.hms.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
