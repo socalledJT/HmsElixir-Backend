@@ -2,10 +2,13 @@ package org.sda.hms.converter;
 
 import org.sda.hms.dto.AppointmentDTO;
 import org.sda.hms.entities.Appointment;
+import org.sda.hms.entities.Employee;
+import org.sda.hms.entities.Examination;
+import org.sda.hms.entities.User;
 
 public class AppointmentConverter {
 
-    public static Appointment toEntity(AppointmentDTO appointmentDTO){
+    public static Appointment toEntity(AppointmentDTO appointmentDTO, User patiendID, Employee doctorID, Examination examinationID){
 
         Appointment appointment = new Appointment();
 
@@ -13,9 +16,9 @@ public class AppointmentConverter {
         appointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
         appointment.setPrescription(appointmentDTO.getPrescription());
         appointment.setPatientNotes(appointmentDTO.getPatientNotes());
-        appointment.setPatientId(appointmentDTO.getPatientId());
-        appointment.setDoctorId(appointmentDTO.getDoctorId());
-        appointment.setExaminationId(appointmentDTO.getExaminationId());
+        appointment.setPatientId(patiendID);
+        appointment.setDoctorId(doctorID);
+        appointment.setExaminationId(examinationID);
 
         return appointment;
     }
@@ -28,9 +31,9 @@ public class AppointmentConverter {
         appointmentDTO.setAppointmentDate(appointment.getAppointmentDate());
         appointmentDTO.setPrescription(appointment.getPrescription());
         appointmentDTO.setPatientNotes(appointment.getPatientNotes());
-        appointmentDTO.setPatientId(appointment.getPatientId());
-        appointmentDTO.setDoctorId(appointment.getDoctorId());
-        appointmentDTO.setExaminationId(appointment.getExaminationId());
+        appointmentDTO.setPatientId(UserConverter.toDto(appointment.getPatientId()));
+        appointmentDTO.setDoctorId(EmployeeConverter.toDto(appointment.getDoctorId()));
+        appointmentDTO.setExaminationId(ExaminationConverter.toDTO(appointment.getExaminationId()));
 
         return appointmentDTO;
     }
