@@ -67,6 +67,12 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+//    TODO Add findByEmail function for the User entity
+//    @Override
+//    public UserDTO findByEmail(String email) {
+//        return UserConverter.toDto(userRepository.findByEmail(email));
+//    }
+
 //    TODO Add reserveAppointment function for User Entity
     public void reserveAppointment(AppointmentDTO appointmentDTO) {
 
