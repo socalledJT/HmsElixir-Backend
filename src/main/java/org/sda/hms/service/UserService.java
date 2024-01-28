@@ -10,9 +10,12 @@ public interface UserService {
 
     void update(UserDTO userDTO);
 
+    void updateAsAdmin(UserDTO userDTO);
+
     UserDTO findById(Integer id);
 
     UserDTO findByEmail(String email);
+
     List<UserDTO> findAll();
 
     void delete(UserDTO userDTO);
