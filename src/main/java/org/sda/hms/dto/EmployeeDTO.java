@@ -7,7 +7,7 @@ import org.sda.hms.entities.User;
 public class EmployeeDTO {
 
         private Integer id;
-        private User userId;
-        private Department departmentId;
+        private UserDTO userId;
+        private DepartmentDTO departmentId;
 
     }
