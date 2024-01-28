@@ -25,7 +25,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void save(DepartmentDTO departmentDTO) {
         if(departmentRepository.existsById(departmentDTO.getId())){
-
             throw new AlreadyExistsException("Department already exist");
 
         }
@@ -62,10 +61,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             return departmentRepository.findAll().stream().map(DepartmentConverter::toDTO).toList();
 
     }
-
-
-
-    }
+}
 
 
 
