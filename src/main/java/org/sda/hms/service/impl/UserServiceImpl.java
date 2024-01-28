@@ -7,6 +7,7 @@ import org.sda.hms.dto.EmployeeDTO;
 import org.sda.hms.dto.ExaminationDTO;
 import org.sda.hms.dto.UserDTO;
 import org.sda.hms.entities.User;
+import org.sda.hms.exeptions.InvalidDataException;
 import org.sda.hms.repository.AppointmentRepo;
 import org.sda.hms.repository.ExaminationRepository;
 import org.sda.hms.repository.UserRepository;
@@ -23,14 +24,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ExaminationRepository examinationRepository;
-
-    @Autowired
-    private AppointmentRepo appointmentRepo;
-
     @Override
     public void save(UserDTO userDTO) {
+       if (userDTO.getFullName().isEmpty() ||
+            userDTO.getFullName().isBlank() |
+            userDTO.getEmail().isEmpty() ||
+            userDTO.getPassword().isEmpty()) {
+           throw new InvalidDataException("Invalid data input!");
+       }
+
         User user = UserConverter.toEntity(userDTO);
 
         userRepository.save(user);
