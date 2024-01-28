@@ -2,9 +2,14 @@ package org.sda.hms.service.impl;
 import org.sda.hms.converter.AppointmentConverter;
 import org.sda.hms.dto.AppointmentDTO;
 import org.sda.hms.entities.Appointment;
+import org.sda.hms.entities.Examination;
+import org.sda.hms.entities.User;
 import org.sda.hms.exeptions.NotAllowedException;
 import org.sda.hms.exeptions.NotFoundException;
 import org.sda.hms.repository.AppointmentRepo;
+import org.sda.hms.repository.EmployeeRepository;
+import org.sda.hms.repository.ExaminationRepository;
+import org.sda.hms.repository.UserRepository;
 import org.sda.hms.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +23,15 @@ public class AppointementServiceImpl implements AppointmentService {
     @Autowired
     private AppointmentRepo appointmentRepo;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ExaminationRepository examinationRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
 
     @Override
     public void save(AppointmentDTO appointmentDTO) {
@@ -27,7 +41,9 @@ public class AppointementServiceImpl implements AppointmentService {
                 && appointmentDTO.getPatientId() != null
                 && appointmentDTO.getDoctorId() != null)
         {
-            Appointment appointment = AppointmentConverter.toEntity(appointmentDTO);
+            Appointment appointment = AppointmentConverter.toEntity(appointmentDTO, userRepository.findById(appointmentDTO.getPatientId().getId()).orElseThrow(),
+                    employeeRepository.findById(appointmentDTO.getDoctorId().getId()).orElseThrow(),
+                    examinationRepository.findById(appointmentDTO.getExaminationId().getId()).orElseThrow());
             appointmentRepo.save(appointment);
 
         }else {
@@ -61,9 +77,8 @@ public class AppointementServiceImpl implements AppointmentService {
 
     @Override
     public void delete(AppointmentDTO appointmentDTO) {
-
         if(appointmentDTO.getId() != null) {
-            Appointment appointment = AppointmentConverter.toEntity(appointmentDTO);
+            Appointment appointment = appointmentRepo.findById(appointmentDTO.getId()).orElseThrow();
             appointmentRepo.delete(appointment);
         }else {
             throw new NotFoundException("Sorry, you can not delete this appointment, it does not exist.");
