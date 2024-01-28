@@ -1,7 +1,6 @@
 package org.sda.hms.controller;
 
-import org.sda.hms.dto.AppointmentDTO;
-import org.sda.hms.dto.EmployeeDto;
+import org.sda.hms.dto.EmployeeDTO;
 import org.sda.hms.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,26 +15,26 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    public void save(@RequestBody EmployeeDto employeeDto){
+    public void save(@RequestBody EmployeeDTO employeeDto){
         employeeService.save(employeeDto);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> findById(@PathVariable Integer id){
+    public ResponseEntity<EmployeeDTO> findById(@PathVariable Integer id){
         return ResponseEntity.ok(employeeService.findById(id));
     }
 
     @PostMapping
-    public void update(@RequestBody EmployeeDto employeeDto){
+    public void update(@RequestBody EmployeeDTO employeeDto){
         employeeService.update(employeeDto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable EmployeeDto id) { /////(Integer id)
+    public void delete(@PathVariable EmployeeDTO id) { /////(Integer id)
         employeeService.delete(id);
     }
 
     @GetMapping
-    public ResponseEntity<List<EmployeeDto>> findAll() {
+    public ResponseEntity<List<EmployeeDTO>> findAll() {
 
         return ResponseEntity.ok(employeeService.findAll());
     }

@@ -42,7 +42,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void delete(DepartmentDTO departmentDTO) {
         Department department = DepartmentConverter.toEntity(departmentDTO);
-
         departmentRepository.delete(department);
     }
     @Override

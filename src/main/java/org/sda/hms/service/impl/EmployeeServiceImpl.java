@@ -1,7 +1,7 @@
 package org.sda.hms.service.impl;
 
 import org.sda.hms.converter.EmployeeConverter;
-import org.sda.hms.dto.EmployeeDto;
+import org.sda.hms.dto.EmployeeDTO;
 import org.sda.hms.entities.Employee;
 import org.sda.hms.repository.EmployeeRepository;
 import org.sda.hms.service.EmployeeService;
@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public void save(EmployeeDto employeeDto) {
+    public void save(EmployeeDTO employeeDto) {
         if (!employeeRepository.findById(employeeDto.getId()).isEmpty()){
             throw new RuntimeException("Ky punonjes ekziston!");
         }
@@ -30,17 +30,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void update(EmployeeDto employeeDto) {
+    public void update(EmployeeDTO employeeDto) {
         if (!employeeRepository.findById(employeeDto.getId()).isEmpty()){
             throw new RuntimeException("Ky punonjes ekziston!");
         }
-        Employee employee=employeeRepository.findById(employeeDto.getId()).orElseThrow(() -> new  RuntimeException("Employee with id" + employeeDto.getId() + " doesn't exist!!!"));
+        Employee employee=employeeRepository.findById(employeeDto.getId())
+                .orElseThrow(() -> new  RuntimeException("Employee with id" + employeeDto.getId() + " doesn't exist!!!"));
         employeeRepository.save(EmployeeConverter.toEntity(employeeDto));
 
     }
 
     @Override
-    public EmployeeDto findById(Integer id) {
+    public EmployeeDTO findById(Integer id) {
         //
         Optional<Employee> reurnedEmployee = employeeRepository.findById(id);
         if (reurnedEmployee.isPresent()) {
@@ -52,14 +53,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void delete(EmployeeDto employeeDto) {
+    public void delete(EmployeeDTO employeeDto) {
         Employee employee=EmployeeConverter.toEntity(employeeDto);
 
         employeeRepository.delete(employee);
     }
 
     @Override
-    public List<EmployeeDto> findAll() {
+    public List<EmployeeDTO> findAll() {
 
         return employeeRepository.findAll().stream().map(EmployeeConverter::toDto).toList();
     }
