@@ -3,6 +3,8 @@ package org.sda.hms.service.impl;
 import org.sda.hms.converter.EmployeeConverter;
 import org.sda.hms.dto.EmployeeDTO;
 import org.sda.hms.entities.Employee;
+import org.sda.hms.exeptions.AlreadyExistsException;
+import org.sda.hms.exeptions.NotFoundException;
 import org.sda.hms.repository.EmployeeRepository;
 import org.sda.hms.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void save(EmployeeDTO employeeDto) {
         if (!employeeRepository.findById(employeeDto.getId()).isEmpty()){
-            throw new RuntimeException("Ky punonjes ekziston!");
+            throw new AlreadyExistsException("This employee exist!");
         }
         Employee employee= EmployeeConverter.toEntity(employeeDto);
         employeeRepository.save(employee);
@@ -32,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void update(EmployeeDTO employeeDto) {
         if (!employeeRepository.findById(employeeDto.getId()).isEmpty()){
-            throw new RuntimeException("Ky punonjes ekziston!");
+            throw new AlreadyExistsException("This employee alredy exist!");
         }
         Employee employee=employeeRepository.findById(employeeDto.getId())
                 .orElseThrow(() -> new  RuntimeException("Employee with id" + employeeDto.getId() + " doesn't exist!!!"));
@@ -48,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return EmployeeConverter.toDto(reurnedEmployee.get());
         }
         else {
-            throw new RuntimeException("Punonjesi nuk u gjet!");
+            throw new NotFoundException("Employee not found!");
         }
     }
 
