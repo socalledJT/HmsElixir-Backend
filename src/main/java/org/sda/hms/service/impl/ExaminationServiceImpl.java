@@ -3,6 +3,8 @@ package org.sda.hms.service.impl;
 import org.sda.hms.converter.ExaminationConverter;
 import org.sda.hms.dto.ExaminationDTO;
 import org.sda.hms.entities.Examination;
+import org.sda.hms.exeptions.AlreadyExistsException;
+import org.sda.hms.exeptions.NotAllowedException;
 import org.sda.hms.exeptions.NotFoundException;
 import org.sda.hms.repository.ExaminationRepository;
 import org.sda.hms.service.ExaminationService;
@@ -23,8 +25,10 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public void save(ExaminationDTO examinationDTO) {
         if (examinationRepository.existsById(examinationDTO.getId())) {
-            throw new RuntimeException("Examination already exist");
+            throw new AlreadyExistsException("Examination already exist");
         }
+
+
             if (examinationDTO.getExaminationDate().isBefore(LocalDateTime.now())){
                 throw  new NotFoundException("Date can not be before today date");
         }
@@ -42,7 +46,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Override
     public void update (ExaminationDTO examinationDTO){
         if (examinationDTO.getExaminationDate().equals(LocalDateTime.now())){
-            throw new RuntimeException("Date selected is not valid");
+            throw new NotAllowedException("Date selected is not valid");
         }
         Examination examination = examinationRepository.findById(examinationDTO.getId())
                 .orElseThrow(() -> new NotFoundException("Examination doesn't exist"));

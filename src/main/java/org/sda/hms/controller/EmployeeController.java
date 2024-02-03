@@ -29,13 +29,13 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable EmployeeDTO id) { /////(Integer id)
-        employeeService.delete(id);
+    public void delete(@PathVariable("id") Integer id) {
+        EmployeeDTO employeeDTO = employeeService.findById(id);
+        employeeService.delete(employeeDTO);
     }
 
     @GetMapping
     public ResponseEntity<List<EmployeeDTO>> findAll() {
-
         return ResponseEntity.ok(employeeService.findAll());
     }
 }

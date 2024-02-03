@@ -61,10 +61,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             return departmentRepository.findAll().stream().map(DepartmentConverter::toDTO).toList();
 
     }
-
-
-
-    }
+}
 
 
 
