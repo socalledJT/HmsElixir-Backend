@@ -1,6 +1,7 @@
 CREATE DATABASE hms;
 USE hms;
 
+
 CREATE TABLE user (
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     full_name VARCHAR(255),
@@ -21,10 +22,7 @@ ALTER TABLE employee ADD FOREIGN KEY (department_id) REFERENCES department(id);
 
 CREATE TABLE department (
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    dep_name VARCHAR(255),
-    employee_id INT,
-    
-    FOREIGN KEY (employee_id) REFERENCES employee(id)
+    dep_name VARCHAR(255)
 );
 
 CREATE TABLE appointment (

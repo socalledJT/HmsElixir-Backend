@@ -8,6 +8,5 @@ import org.sda.hms.entities.Employee;
 public class DepartmentDTO {
     private Integer id;
     private String depName;
-    private Employee employeeId;
 
 }
