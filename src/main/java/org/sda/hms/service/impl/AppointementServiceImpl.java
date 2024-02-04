@@ -1,9 +1,8 @@
 package org.sda.hms.service.impl;
+import jakarta.transaction.Transactional;
 import org.sda.hms.converter.AppointmentConverter;
 import org.sda.hms.dto.AppointmentDTO;
 import org.sda.hms.entities.Appointment;
-import org.sda.hms.entities.Examination;
-import org.sda.hms.entities.User;
 import org.sda.hms.exeptions.NotAllowedException;
 import org.sda.hms.exeptions.NotFoundException;
 import org.sda.hms.repository.AppointmentRepo;
@@ -18,6 +17,7 @@ import java.util.List;
 
 
 @Service
+@Transactional
 public class AppointementServiceImpl implements AppointmentService {
 
     @Autowired
