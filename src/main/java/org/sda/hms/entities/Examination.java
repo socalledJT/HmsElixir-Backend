@@ -25,6 +25,6 @@ public class Examination {
     private User userId;
 
     @ManyToOne
-    @JoinColumn(name = " employee_id", referencedColumnName = "employeeId")
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employeeId;
 }
