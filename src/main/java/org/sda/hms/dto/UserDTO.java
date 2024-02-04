@@ -16,5 +16,5 @@ public class UserDTO {
 
     private UserRole role;
 
-    private String department;
+    private DepartmentDTO departmentId;
 }

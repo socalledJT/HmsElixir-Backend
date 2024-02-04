@@ -1,6 +1,7 @@
 package org.sda.hms.converter;
 
 import org.sda.hms.dto.UserDTO;
+import org.sda.hms.entities.Department;
 import org.sda.hms.entities.User;
 
 public class UserConverter {
@@ -13,12 +14,12 @@ public class UserConverter {
         userDTO.setEmail(userDTO.getEmail());
         userDTO.setPassword(user.getPassword());
         userDTO.setRole(user.getRole());
-        userDTO.setDepartment(user.getDepartment());
+        userDTO.setDepartmentId(DepartmentConverter.toDTO(user.getDepartmentId()));
 
         return userDTO;
     }
 
-    public static User toEntity(UserDTO userDTO) {
+    public static User toEntity(UserDTO userDTO, Department departmentId) {
         User user = new User();
 
         user.setId(userDTO.getId());
@@ -26,7 +27,7 @@ public class UserConverter {
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setRole(userDTO.getRole());
-        user.setDepartment(userDTO.getDepartment());
+        user.setDepartmentId(departmentId);
 
         return user;
     }
@@ -46,7 +47,7 @@ public class UserConverter {
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setRole(userDTO.getRole());
-        user.setDepartment(userDTO.getDepartment());
+        user.setDepartmentId(DepartmentConverter.toEntity(userDTO.getDepartmentId()));
 
         return user;
     }

@@ -16,7 +16,6 @@ import java.util.List;
 
 @Service
 @Transactional
-
 public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired

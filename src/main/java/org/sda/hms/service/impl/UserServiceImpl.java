@@ -2,18 +2,13 @@ package org.sda.hms.service.impl;
 
 import jakarta.transaction.Transactional;
 import org.sda.hms.converter.UserConverter;
-import org.sda.hms.dto.AppointmentDTO;
-import org.sda.hms.dto.EmployeeDTO;
-import org.sda.hms.dto.ExaminationDTO;
 import org.sda.hms.dto.UserDTO;
 import org.sda.hms.entities.User;
 import org.sda.hms.entities.enums.UserRole;
 import org.sda.hms.entities.utils.PasswordUtil;
 import org.sda.hms.exeptions.InvalidDataException;
 import org.sda.hms.exeptions.NotFoundException;
-import org.sda.hms.exeptions.WrongPasswordException;
-import org.sda.hms.repository.AppointmentRepo;
-import org.sda.hms.repository.ExaminationRepository;
+import org.sda.hms.repository.DepartmentRepository;
 import org.sda.hms.repository.UserRepository;
 import org.sda.hms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     @Override
     public void save(UserDTO userDTO) {
@@ -42,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
        userDTO.setPassword(PasswordUtil.hashPassword(userDTO.getPassword()));
 
-       User user = UserConverter.toEntity(userDTO);
+       User user = UserConverter.toEntity(userDTO, departmentRepository.findById(userDTO.getDepartmentId().getId()).orElseThrow());
        userRepository.save(user);
     }
 

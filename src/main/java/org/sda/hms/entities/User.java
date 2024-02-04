@@ -26,5 +26,5 @@ public class User {
     private UserRole role;
 
     @Column(name = "department")
-    private String department;
+    private Department departmentId;
 }
