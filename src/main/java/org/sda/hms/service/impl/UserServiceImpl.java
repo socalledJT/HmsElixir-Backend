@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
        userDTO.setPassword(PasswordUtil.hashPassword(userDTO.getPassword()));
 
-       User user = UserConverter.toEntity(userDTO, departmentRepository.findById(userDTO.getDepartmentId().getId()).orElseThrow());
+       User user = UserConverter.toEntity(userDTO);
        userRepository.save(user);
     }
 

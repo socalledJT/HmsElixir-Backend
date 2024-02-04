@@ -25,7 +25,4 @@ public class User {
     @Column(name = "role")
     private UserRole role;
 
-    @OneToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
-    private Department departmentId;
 }

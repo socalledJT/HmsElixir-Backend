@@ -1,6 +1,7 @@
 package org.sda.hms.dto;
 
 import lombok.Data;
+import org.sda.hms.entities.Department;
 import org.sda.hms.entities.enums.UserRole;
 
 @Data
@@ -16,5 +17,4 @@ public class UserDTO {
 
     private UserRole role;
 
-    private DepartmentDTO departmentId;
 }
