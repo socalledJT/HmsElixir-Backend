@@ -14,12 +14,11 @@ public class UserConverter {
         userDTO.setEmail(userDTO.getEmail());
         userDTO.setPassword(user.getPassword());
         userDTO.setRole(user.getRole());
-        userDTO.setDepartmentId(DepartmentConverter.toDTO(user.getDepartmentId()));
 
         return userDTO;
     }
 
-    public static User toEntity(UserDTO userDTO, Department departmentId) {
+    public static User toEntity(UserDTO userDTO) {
         User user = new User();
 
         user.setId(userDTO.getId());
@@ -27,7 +26,6 @@ public class UserConverter {
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setRole(userDTO.getRole());
-        user.setDepartmentId(departmentId);
 
         return user;
     }
@@ -47,7 +45,6 @@ public class UserConverter {
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setRole(userDTO.getRole());
-        user.setDepartmentId(DepartmentConverter.toEntity(userDTO.getDepartmentId()));
 
         return user;
     }

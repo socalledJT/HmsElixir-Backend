@@ -10,9 +10,6 @@ CREATE TABLE user (
     role VARCHAR(255)
 );
 
-ALTER TABLE user ADD COLUMN department_id INT;
-ALTER TABLE user ADD FOREIGN KEY (department_id) REFERENCES department(id);
-
 CREATE TABLE employee (
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     user_id INT,
