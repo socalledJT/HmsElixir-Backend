@@ -25,6 +25,4 @@ public class User {
     @Column(name = "role")
     private UserRole role;
 
-    @Column(name = "department")
-    private String department;
 }

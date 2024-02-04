@@ -15,7 +15,4 @@ public class Department {
     @Column(name = "dep_name")
     private String depName;
 
-    @Column(name = "employee_id")
-    private Employee employeeId;
-
 }

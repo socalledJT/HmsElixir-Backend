@@ -9,7 +9,6 @@ public class DepartmentConverter {
 
         department.setId(departmentDTO.getId());
         department.setDepName(departmentDTO.getDepName());
-        department.setEmployeeId(departmentDTO.getEmployeeId());
 
 
         return department;
@@ -21,7 +20,6 @@ public class DepartmentConverter {
 
         departmentDTO.setId(department.getId());
         departmentDTO.setDepName(department.getDepName());
-        departmentDTO.setEmployeeId(department.getEmployeeId());
 
 
         return departmentDTO;
@@ -30,8 +28,6 @@ public class DepartmentConverter {
     public static Department toEntityForUpdate(Department department,DepartmentDTO departmentDTO){
 
         department.setDepName(departmentDTO.getDepName());
-        department.setEmployeeId(departmentDTO.getEmployeeId());
-        // updated
 
         return department;
     }

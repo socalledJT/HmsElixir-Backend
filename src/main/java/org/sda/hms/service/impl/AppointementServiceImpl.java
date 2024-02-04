@@ -1,4 +1,5 @@
 package org.sda.hms.service.impl;
+import jakarta.transaction.Transactional;
 import org.sda.hms.converter.AppointmentConverter;
 import org.sda.hms.dto.AppointmentDTO;
 import org.sda.hms.entities.Appointment;
@@ -16,6 +17,7 @@ import java.util.List;
 
 
 @Service
+@Transactional
 public class AppointementServiceImpl implements AppointmentService {
 
     @Autowired
@@ -39,8 +41,6 @@ public class AppointementServiceImpl implements AppointmentService {
                 && appointmentDTO.getPatientId() != null
                 && appointmentDTO.getDoctorId() != null)
         {
-            Appointment appointment = AppointmentConverter.toEntity(appointmentDTO, userRepository
-                            .findById(appointmentDTO.getPatientId().getId()).orElseThrow(),
                     employeeRepository.findById(appointmentDTO.getDoctorId().getId()).orElseThrow(),
                     examinationRepository.findById(appointmentDTO.getExaminationId().getId()).orElseThrow());
             appointmentRepo.save(appointment);

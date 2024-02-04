@@ -23,7 +23,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.findById(id));
     }
 
-    @PostMapping
+    @PutMapping
     public void update(@RequestBody EmployeeDTO employeeDto){
         employeeService.update(employeeDto);
     }
