@@ -27,6 +27,11 @@ Project Layout & Used Technologies:
    - Used Postman to create APIs and test the system
   - Testing
     - Used Mockito and JUnit libraries for Maven to complete unit Testing
-   
+  - Coordination of Work
+    - Used Scrum methodology to coordinate work
+    - Used Trello to implement that methodology as well as help in documentation
+  - Project Documentation
+    - Used Microsoft Word to create a Design Document for the Project.
+    - Used Microsoft Word to add User Stories
 
 > **_NOTE:_** This project is not yet fully finished as it still needs some last tests to be completed and a bit of cleaning to come soon!
