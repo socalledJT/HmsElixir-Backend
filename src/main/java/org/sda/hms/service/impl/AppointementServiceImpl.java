@@ -31,6 +31,7 @@ public class AppointementServiceImpl implements AppointmentService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    private Appointment appointment;
 
 
     @Override
@@ -41,8 +42,8 @@ public class AppointementServiceImpl implements AppointmentService {
                 && appointmentDTO.getPatientId() != null
                 && appointmentDTO.getDoctorId() != null)
         {
-                    employeeRepository.findById(appointmentDTO.getDoctorId().getId()).orElseThrow(),
-                    examinationRepository.findById(appointmentDTO.getExaminationId().getId()).orElseThrow());
+            employeeRepository.findById(appointmentDTO.getDoctorId().getId()).orElseThrow(),
+            examinationRepository.findById(appointmentDTO.getExaminationId().getId()).orElseThrow());
             appointmentRepo.save(appointment);
 
         }else {
